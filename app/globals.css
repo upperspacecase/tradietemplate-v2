@@ -4,16 +4,22 @@
 }
 
 @theme inline {
-  --color-brand: #f59e0b;
-  --color-brand-dark: #d97706;
-  --color-navy: #0f172a;
-  --color-navy-light: #1e293b;
-  --color-navy-lighter: #334155;
+  --color-primary: #0EA5E9;
+  --color-primary-light: #38BDF8;
+  --color-primary-dark: #0C4A6E;
+  --color-cta: #F97316;
+  --color-cta-dark: #EA580C;
+  --color-surface: #F0F9FF;
+  --color-surface-alt: #E0F2FE;
+  --color-text: #0C4A6E;
+  --color-text-muted: #475569;
+  --color-text-light: #64748B;
   --color-google-yellow: #FBBC04;
   --color-google-blue: #4285F4;
   --color-google-red: #EA4335;
   --color-google-green: #34A853;
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-body: "Work Sans", system-ui, -apple-system, sans-serif;
 }
 
 html {
@@ -21,9 +27,13 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
-  color: #1e293b;
+  font-family: var(--font-body);
+  color: #0C4A6E;
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }
