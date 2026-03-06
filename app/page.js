@@ -1,28 +1,21 @@
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import TrustBar from "@/components/TrustBar";
+import Proof from "@/components/Proof";
 import Services from "@/components/Services";
-import About from "@/components/About";
-import GoogleReviews from "@/components/GoogleReviews";
-import ServiceArea from "@/components/ServiceArea";
-import ContactForm from "@/components/ContactForm";
-import Footer from "@/components/Footer";
+import Contact from "@/components/Contact";
 import siteConfig from "@/config/siteConfig";
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <TrustBar />
-        <Services />
-        <About />
-        <GoogleReviews reviews={siteConfig.reviews} />
-        <ServiceArea />
-        <ContactForm />
-      </main>
-      <Footer />
-    </>
+    <main>
+      <Hero />
+      <Proof reviews={siteConfig.reviews} />
+      <Services services={siteConfig.services} />
+      <Contact />
+      <footer className="bg-black py-8 text-center">
+        <p className="text-grey text-xs tracking-widest uppercase font-[family-name:var(--font-body)]">
+          {new Date().getFullYear()} {siteConfig.businessName}
+        </p>
+      </footer>
+    </main>
   );
 }

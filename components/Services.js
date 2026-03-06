@@ -1,43 +1,79 @@
-import * as LucideIcons from "lucide-react";
-import siteConfig from "@/config/siteConfig";
+"use client";
 
-export default function Services() {
-    return (
-        <section id="services" className="bg-white py-16 sm:py-20 lg:py-24">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl sm:text-4xl font-bold text-primary-dark font-[family-name:var(--font-heading)]">
-                        Our Services
-                    </h2>
-                    <p className="mt-3 text-text-muted text-lg max-w-xl mx-auto">
-                        Professional electrical services for homes and businesses across{" "}
-                        {siteConfig.serviceArea.suburbs[0]} and surrounding areas.
-                    </p>
-                </div>
+import { useEffect, useRef } from "react";
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {siteConfig.services.map((service, i) => {
-                        const Icon = LucideIcons[service.icon] || LucideIcons.Zap;
-                        return (
-                            <a
-                                key={i}
-                                href="#contact"
-                                className="group block bg-surface hover:bg-primary rounded-xl p-6 transition-all duration-200 border border-sky-100 hover:border-primary cursor-pointer"
-                            >
-                                <div className="w-12 h-12 rounded-xl bg-primary/10 group-hover:bg-white/20 flex items-center justify-center mb-4">
-                                    <Icon className="w-6 h-6 text-primary group-hover:text-white" />
-                                </div>
-                                <h3 className="text-lg font-semibold text-primary-dark group-hover:text-white mb-2 font-[family-name:var(--font-heading)]">
-                                    {service.title}
-                                </h3>
-                                <p className="text-text-muted group-hover:text-sky-100 text-sm leading-relaxed">
-                                    {service.description}
-                                </p>
-                            </a>
-                        );
-                    })}
-                </div>
-            </div>
-        </section>
+function ServiceItem({ service, index }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.transitionDelay = `${index * 0.1}s`;
+          el.classList.add("visible");
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.15 }
     );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [index]);
+
+  return (
+    <div ref={ref} className="reveal-slide group">
+      <div className="py-6 sm:py-8 border-b border-white/10 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 cursor-default">
+        <h3
+          className="font-[family-name:var(--font-heading)] text-white group-hover:text-gold transition-colors duration-200"
+          style={{ fontSize: "clamp(1.5rem, 3vw, 2.5rem)" }}
+        >
+          {service.title}
+        </h3>
+        <p className="font-[family-name:var(--font-body)] text-grey text-sm sm:text-base max-w-sm sm:text-right opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {service.description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default function Services({ services }) {
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("visible");
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section className="bg-black py-20 sm:py-28 lg:py-36">
+      <div className="max-w-4xl mx-auto px-6 sm:px-8">
+        {/* Section label */}
+        <div ref={headerRef} className="reveal mb-12">
+          <p className="font-[family-name:var(--font-body)] text-grey text-xs tracking-[0.3em] uppercase mb-4">
+            What we do
+          </p>
+          <div className="h-px bg-white/10" />
+        </div>
+
+        {/* Service list */}
+        {services.map((service, i) => (
+          <ServiceItem key={i} service={service} index={i} />
+        ))}
+      </div>
+    </section>
+  );
 }

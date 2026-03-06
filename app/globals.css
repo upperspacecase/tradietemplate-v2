@@ -1,25 +1,15 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: light --default;
-}
 
 @theme inline {
-  --color-primary: #0EA5E9;
-  --color-primary-light: #38BDF8;
-  --color-primary-dark: #0C4A6E;
-  --color-cta: #F97316;
-  --color-cta-dark: #EA580C;
-  --color-surface: #F0F9FF;
-  --color-surface-alt: #E0F2FE;
-  --color-text: #0C4A6E;
-  --color-text-muted: #475569;
-  --color-text-light: #64748B;
-  --color-google-yellow: #FBBC04;
-  --color-google-blue: #4285F4;
-  --color-google-red: #EA4335;
-  --color-google-green: #34A853;
-  --font-heading: "Outfit", system-ui, -apple-system, sans-serif;
-  --font-body: "Work Sans", system-ui, -apple-system, sans-serif;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-gold: #D4AF37;
+  --color-gold-dim: #B8962E;
+  --color-grey: #999999;
+  --color-grey-light: #E5E5E5;
+  --color-grey-dark: #333333;
+  --font-heading: "Bodoni Moda", "Georgia", serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
 }
 
 html {
@@ -28,12 +18,121 @@ html {
 
 body {
   font-family: var(--font-body);
-  color: #0C4A6E;
-  background: #ffffff;
+  color: #000000;
+  background: #000000;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+}
+
+/* Hero entrance animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drawLine {
+  from {
+    width: 0;
+  }
+  to {
+    width: 80px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.animate-draw-line {
+  animation: drawLine 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease both;
+}
+
+/* Scroll-triggered animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-slide {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-slide.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-up-delay-1,
+  .animate-fade-up-delay-2,
+  .animate-fade-up-delay-3,
+  .animate-draw-line,
+  .animate-fade-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .reveal, .reveal-slide {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Selection color */
+::selection {
+  background: #D4AF37;
+  color: #000000;
 }

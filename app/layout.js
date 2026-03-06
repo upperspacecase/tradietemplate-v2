@@ -1,38 +1,31 @@
-import { Outfit, Work_Sans } from "next/font/google";
+import { Bodoni_Moda, Inter } from "next/font/google";
 import "./globals.css";
 import siteConfig from "@/config/siteConfig";
 
-const outfit = Outfit({
+const bodoni = Bodoni_Moda({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
   variable: "--font-heading",
 });
 
-const workSans = Work_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
   variable: "--font-body",
 });
 
 export const metadata = {
   title: `${siteConfig.businessName} | ${siteConfig.tagline}`,
-  description: `${siteConfig.businessName} — ${siteConfig.tagline}. Call ${siteConfig.phone} for a free quote. Licensed, insured, and locally owned.`,
-  keywords: [
-    "electrician",
-    "electrical contractor",
-    "licensed electrician",
-    ...siteConfig.serviceArea.suburbs.map(
-      (s) => `electrician ${s.toLowerCase()}`
-    ),
-  ],
+  description: `${siteConfig.businessName} — ${siteConfig.tagline}. Call ${siteConfig.phone} for a free quote.`,
+  keywords: ["electrician", "electrical contractor", "licensed electrician", "Brisbane electrician"],
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${workSans.variable}`}>
+      <body className={`${bodoni.variable} ${inter.variable}`}>
         {children}
       </body>
     </html>
